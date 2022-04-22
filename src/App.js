@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import React from 'react';
+import { CreateTodoButton } from './CreateTodoButton';
+import { TodoCounter } from './TodoCounter';
+import { TodoSearch } from './TodoSearch';
+import { Todolist } from './TodoList';
+import { TodoItem } from './TodoItem';
 
-function App() {
+const todos = [
+  { id: 1, text: 'Preparar ceviche.', completed: false },
+  { id: 2, text: 'Tomar el curso de introducción a React.', completed: false },
+  { id: 3, text: 'Practicar React', completed: false },
+];
+
+function App(props) {
+  //Deestructuramos las propiedades enviadas por los props
+  //let { saludo } = { ...props };
+
+  //El React.Fragment no genera una etiqueta dentro del DOM, pero
+  //ayuda al render de React para devolver un solo elemento.
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <TodoCounter />
+      <TodoSearch />
+
+      <Todolist>
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} text={todo.text} />
+        ))}
+      </Todolist>
+      <CreateTodoButton />
+    </React.Fragment>
   );
 }
 
